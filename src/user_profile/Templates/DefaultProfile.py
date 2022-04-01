@@ -6,7 +6,7 @@ class Profile( ProfileParent ):
 
     def __init__( self ):
 
-        ProfileParent.__init__()
+        ProfileParent.__init__( self )
 
         self.id = '{{id}}'
         self.email = '{{email}}'
