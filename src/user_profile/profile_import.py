@@ -1,13 +1,8 @@
-from py_starter import py_starter as ps
-from dir_ops import dir_ops as do
-
-import os
+import py_starter as ps
+import dir_ops as do
+import user_profile
 
 ###
-file_Path = do.Path( os.path.abspath(__file__) )
-repo_Dir = file_Path.ascend( level_to_ascend = 3 ) #user_profile/src/user_profile/profile_import.py
-templates_Dir = do.Dir( file_Path.ascend().join( 'Templates' ) )
-
 trigger_beg = '{{'
 trigger_end = '}}'
 
@@ -25,7 +20,7 @@ def get_user_env_var() -> str:
 
 def get_template_Path() -> do.Path:
 
-    template_option_Paths = templates_Dir.list_contents_Paths(block_dirs=True,block_paths=False)
+    template_option_Paths = user_profile.templates_Dir.list_contents_Paths(block_dirs=True,block_paths=False)
 
     # make sure we only have Profile Templates in here
     for i in range(len(template_option_Paths)-1, -1, -1):
@@ -66,7 +61,7 @@ def create_profile( user_module_Path: do.Path ) -> None:
     #format the contents of the template 
     formatting_dict = {
         'id': get_user_env_var(),
-        'default_repo_parent_Dir': repo_Dir.ascend().p
+        'default_repo_parent_Dir': user_profile._cwd_Dir.ascend().p
     }
 
     #enter values for all other values that couldn't be filled in
@@ -88,7 +83,7 @@ def create_profile( user_module_Path: do.Path ) -> None:
 def init():
 
     user_var = get_user_env_var()
-    user_module_Path = do.Path( file_Path.ascend().join('Users', user_var + '.py') )
+    user_module_Path = do.Path( user_profile.users_Dir.join( user_var +'.py' ) )
 
     if not user_module_Path.exists():
         create_profile( user_module_Path )

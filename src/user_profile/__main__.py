@@ -1,6 +1,2 @@
-import sys
-sys_args = sys.argv[1:]
-
-from user_profile.user_profile import run
-run( *sys_args )
-
+import user_profile
+user_profile.profile.print_atts()
