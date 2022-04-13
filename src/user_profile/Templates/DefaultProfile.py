@@ -1,5 +1,5 @@
 import os
-from dir_ops import dir_ops as do
+import dir_ops as do
 from user_profile.ProfileParent import ProfileParent
 
 class Profile( ProfileParent ):
