@@ -1,0 +1,35 @@
+{
+    "local_config": {
+        "!Dir":{
+            "$ref": "{{config.Dir}}",
+            "method":{
+                "name": "join_Dir",
+                "kwargs":{
+                    "path": ".user"
+                }
+            }
+        }
+    },
+    "templates":{
+        "!Dir":{
+            "$ref": "{{_Dir}}",
+            "method":{
+                "name": "join_Dir",
+                "kwargs":{
+                    "path": "Templates"
+                }
+            }
+        }
+    },
+    "user":{
+        "!Path":{
+            "$ref": "{{local_config.Dir}}",
+            "method":{
+                "name": "join_Path",
+                "kwargs":{
+                    "path": "{{user_to_load}}.json"
+                }
+            }
+        }
+    }
+}

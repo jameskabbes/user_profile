@@ -1,7 +1,3 @@
-### Test
-
-from . import profile_import
-
 import dir_ops as do
 import os
 
@@ -10,10 +6,11 @@ _src_Dir = _Dir.ascend()                                  #src Dir that is one a
 _repo_Dir = _src_Dir.ascend()                    
 _cwd_Dir = do.Dir( do.get_cwd() )
 
-templates_Dir = do.Dir( _Dir.join( 'Templates' ) )
-users_Dir = do.Dir( _Dir.join( 'Users' ) )
+DEFAULT_CONFIG_PATH = _Dir.join_Path( path = 'default_config.json' )
 
-###
-#  
-###
-profile = profile_import.init()
+from .Client import Client
+client = Client()
+
+profile = client.profile
+
+
