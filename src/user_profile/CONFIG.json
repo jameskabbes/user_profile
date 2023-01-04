@@ -1,15 +1,4 @@
 {
-    "local_config": {
-        "!Dir":{
-            "$ref": "{{config.Dir}}",
-            "method":{
-                "name": "join_Dir",
-                "kwargs":{
-                    "path": ".user"
-                }
-            }
-        }
-    },
     "templates":{
         "!Dir":{
             "$ref": "{{_Dir}}",
@@ -21,9 +10,20 @@
             }
         }
     },
-    "user":{
+    "profiles":{
+        "!Dir":{
+            "$ref": "{{cache.package.Dir}}",
+            "method":{
+                "name": "join_Dir",
+                "kwargs":{
+                    "path": "profiles"
+                }
+            }
+        }
+    },
+    "profile":{
         "!Path":{
-            "$ref": "{{local_config.Dir}}",
+            "$ref": "{{profiles.Dir}}",
             "method":{
                 "name": "join_Path",
                 "kwargs":{

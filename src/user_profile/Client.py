@@ -1,32 +1,30 @@
 from parent_class import ParentClass
+import kabbes_client
 import kabbes_config
 import user_profile
 import py_starter as ps
 
-class Client( ParentClass ):
+class Client( kabbes_client.Client ):
 
     _USER_PROFIlE_TRIGGER_BEG = '{-{'
     _USER_PROFIlE_TRIGGER_END = '}-}'
 
-    _DEFAULT_CONFIG = {
+    _CONFIG = {
         "user_to_load": ps.get_env_var('USER') if ps.get_env_var('USER') != None else 'USER',
         "_Dir": user_profile._Dir
     }
 
-    def __init__( self, **override_config ):
-
-        config = kabbes_config.Config( **self._DEFAULT_CONFIG )
-        self.cfg = kabbes_config.load_Config( user_profile.DEFAULT_CONFIG_PATH, config=config )
-        self.cfg.load_dict( override_config )
-
+    def __init__( self, *args, **kwargs ):
+        kabbes_client.Client.__init__( self, *args, **kwargs )
         self.load_user_profile()
 
     def load_user_profile( self ):
         
-        if not self.cfg.user.Path.exists():
+        if not self.cfg.profile.Path.exists():
             self.create_profile()
 
-        self.profile = kabbes_config.Config( **ps.json_to_dict(self.cfg.user.Path.read()) )
+        self.cfg.load_dict( self.cfg.profile.Path.read_json_to_dict() )
+        self.profile = self.cfg
 
     def get_template_Path( self ):
 
@@ -47,14 +45,14 @@ class Client( ParentClass ):
 
         #copy and paste the template
         print ('Generating your user Profile')
-        template_Path.copy( Destination = self.cfg.user.Path, print_off = False )
+        template_Path.copy( Destination = self.cfg.profile.Path, print_off = False )
 
         #read the contents of the newly created module
-        template_contents = self.cfg.user.Path.read()
+        template_contents = self.cfg.profile.Path.read()
 
         #format the contents of the template 
         formatting_dict = {
-            'id': self.cfg.user_to_load,
+            'id': self.cfg.user_to_load
         }
 
         #enter values for all other values that couldn't be filled in
