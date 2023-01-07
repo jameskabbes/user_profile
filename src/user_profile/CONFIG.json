@@ -12,7 +12,7 @@
     },
     "profiles":{
         "!Dir":{
-            "$ref": "{{cache.package.Dir}}",
+            "$ref": "{{package.config.cache.Dir}}",
             "method":{
                 "name": "join_Dir",
                 "kwargs":{

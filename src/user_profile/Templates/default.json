@@ -3,14 +3,5 @@
     "email": "{-{email}-}",
     "first_name": "{-{first_name}-}",
     "last_name": "{-{last_name}-}",
-    "name": "{{first_name}} {{last_name}}",
-    "!default_repo_parent_Dir":{
-        "$ref": "{{home.Dir}}",
-        "method":{
-            "name": "join_Dir",
-            "kwargs":{
-                "path": "Documents/Repos"
-            }
-        }
-    }
+    "name": "{{first_name}} {{last_name}}"
 }

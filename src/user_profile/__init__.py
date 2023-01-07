@@ -6,7 +6,7 @@ _src_Dir = _Dir.ascend()                                  #src Dir that is one a
 _repo_Dir = _src_Dir.ascend()                    
 _cwd_Dir = do.Dir( do.get_cwd() )
 
-DEFAULT_CONFIG_PATH = _Dir.join_Path( path = 'default_config.json' )
+CONFIG_KEY = 'user_profile'
 
 from .Client import Client
 client = Client()

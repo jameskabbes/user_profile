@@ -1,4 +1,3 @@
-from parent_class import ParentClass
 import kabbes_client
 import kabbes_config
 import user_profile
@@ -14,21 +13,22 @@ class Client( kabbes_client.Client ):
         "_Dir": user_profile._Dir
     }
 
-    def __init__( self, *args, **kwargs ):
-        kabbes_client.Client.__init__( self, *args, **kwargs )
+    def __init__( self, **kwargs ):
+
+        kabbes_client.Client.__init__( self, **kwargs )
         self.load_user_profile()
 
     def load_user_profile( self ):
-        
-        if not self.cfg.profile.Path.exists():
+
+        if not self.cfg['profile.Path'].exists():
             self.create_profile()
 
-        self.cfg.load_dict( self.cfg.profile.Path.read_json_to_dict() )
-        self.profile = self.cfg
+        self.profile = kabbes_config.Config()
+        self.profile.load_dict( self.cfg['profile.Path'].read_json_to_dict() ) 
 
     def get_template_Path( self ):
 
-        template_Paths = self.cfg.templates.Dir.list_contents_Paths(block_dirs=True,block_paths=False)
+        template_Paths = self.cfg['templates.Dir'].list_contents_Paths(block_dirs=True,block_paths=False)
 
         # This will be an error, no template options present
         if len(template_Paths) == 0:
@@ -45,14 +45,14 @@ class Client( kabbes_client.Client ):
 
         #copy and paste the template
         print ('Generating your user Profile')
-        template_Path.copy( Destination = self.cfg.profile.Path, print_off = False )
+        template_Path.copy( Destination = self.cfg['profile.Path'], print_off = False )
 
         #read the contents of the newly created module
-        template_contents = self.cfg.profile.Path.read()
+        template_contents = self.cfg['profile.Path'].read()
 
         #format the contents of the template 
         formatting_dict = {
-            'id': self.cfg.user_to_load
+            'id': self.cfg['user_to_load']
         }
 
         #enter values for all other values that couldn't be filled in
@@ -68,5 +68,5 @@ class Client( kabbes_client.Client ):
         formatted_contents = ps.smart_format( template_contents, formatting_dict, trigger_beg=Client._USER_PROFIlE_TRIGGER_BEG,trigger_end=Client._USER_PROFIlE_TRIGGER_END  )
 
         #write the formatted info back
-        self.cfg.user.Path.write( string = formatted_contents )
+        self.cfg['profile.Path'].write( string = formatted_contents )
     
