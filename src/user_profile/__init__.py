@@ -8,8 +8,8 @@ _cwd_Dir = do.Dir( do.get_cwd() )
 
 CONFIG_KEY = 'user_profile'
 
+from .Profile import Profile
 from .Client import Client
-client = Client()
 
-profile = client.profile
-
+default_client = Client()
+profile = default_client.profile

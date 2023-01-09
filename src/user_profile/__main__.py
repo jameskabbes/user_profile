@@ -1,4 +1,6 @@
 import user_profile
-user_profile.profile.print_atts()
+
+C = user_profile.Client()
+C.profile.print_atts()
 
 
