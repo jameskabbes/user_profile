@@ -5,7 +5,7 @@ import user_profile
 
 class Profile( ParentClass ):
 
-    _USER_PROFILE_TRIGGER_BEG = "{-{}-}"
+    _USER_PROFIlE_TRIGGER_BEG = "{-{}-}"
     _USER_PROFIlE_TRIGGER_END = "{-{}-}"
 
     def __init__( self ):
