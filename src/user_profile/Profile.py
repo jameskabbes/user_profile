@@ -1,12 +1,13 @@
 from parent_class import ParentClass
 import py_starter as ps
 import kabbes_config
-import user_profile
 
 class Profile( ParentClass ):
 
-    _USER_PROFIlE_TRIGGER_BEG = "{-{"
-    _USER_PROFIlE_TRIGGER_END = "}-}"
+    _USER_PROFIlE_TRIGGER_BEG = "{UP{"
+    _USER_PROFIlE_TRIGGER_END = "}UP}"
+
+    _CFG_KEY = 'profile'
 
     def __init__( self ):
         ParentClass.__init__( self )
@@ -14,15 +15,15 @@ class Profile( ParentClass ):
 
     def load( self ):
 
-        if not self.client.cfg['profile.Path'].exists():
+        if not self.cfg['profile_Path'].exists():
             self.create_profile()
 
-        self.cfg_user = kabbes_config.Config( dict=self.client.cfg['profile.Path'].read_json_to_dict() )
-        self.profile = self.cfg_user.get_node( user_profile.CONFIG_KEY ) 
+        self.profile = kabbes_config.Node( Profile._CFG_KEY, dict=self.cfg['profile_Path'].read_json_to_dict() )
+        self.cfg.adopt( self.profile )
 
     def get_template_Path( self ):
 
-        template_Paths = self.client.cfg['templates.Dir'].list_contents_Paths(block_dirs=True,block_paths=False)
+        template_Paths = self.cfg['templates_Dir'].list_contents_Paths(block_dirs=True,block_paths=False)
 
         # This will be an error, no template options present
         if len(template_Paths) == 0:
@@ -39,14 +40,14 @@ class Profile( ParentClass ):
 
         #copy and paste the template
         print ('Generating your user Profile')
-        template_Path.copy( Destination = self.client.cfg['profile.Path'], print_off = False )
+        template_Path.copy( Destination = self.cfg['profile_Path'], print_off = False )
 
         #read the contents of the newly created module
-        template_contents = self.client.cfg['profile.Path'].read()
+        template_contents = self.cfg['profile_Path'].read()
 
         #format the contents of the template 
         formatting_dict = {
-            'id': self.client.cfg['user_to_load']
+            'id': self.cfg[ 'user_to_load' ]
         }
 
         #enter values for all other values that couldn't be filled in
@@ -62,5 +63,5 @@ class Profile( ParentClass ):
         formatted_contents = ps.smart_format( template_contents, formatting_dict, trigger_beg=Profile._USER_PROFIlE_TRIGGER_BEG,trigger_end=Profile._USER_PROFIlE_TRIGGER_END  )
 
         #write the formatted info back
-        self.client.cfg['profile.Path'].write( string = formatted_contents )
+        self.cfg['profile_Path'].write( string = formatted_contents )
     

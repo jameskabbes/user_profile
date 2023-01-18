@@ -1,34 +1,28 @@
 {
-    "templates":{
-        "!Dir":{
-            "$ref": "{{_Dir}}",
-            "method":{
-                "name": "join_Dir",
-                "kwargs":{
-                    "path": "Templates"
-                }
+    "!templates_Dir":{
+        "$ref": "{R{_Dir}R}",
+        "method":{
+            "name": "join_Dir",
+            "kwargs":{
+                "path": "Templates"
             }
         }
     },
-    "profiles":{
-        "!Dir":{
-            "$ref": "{{package.config.cache.Dir}}",
-            "method":{
-                "name": "join_Dir",
-                "kwargs":{
-                    "path": "profiles"
-                }
+    "!profiles_Dir":{
+        "$ref": "{R{package.config.cache.Dir}R}",
+        "method":{
+            "name": "join_Dir",
+            "kwargs":{
+                "path": "profiles"
             }
         }
     },
-    "profile":{
-        "!Path":{
-            "$ref": "{{profiles.Dir}}",
-            "method":{
-                "name": "join_Path",
-                "kwargs":{
-                    "path": "{{user_to_load}}.json"
-                }
+    "!profile_Path":{
+        "$ref": "{R{profiles_Dir}R}",
+        "method":{
+            "name": "join_Path",
+            "kwargs":{
+                "path": "{R{user_to_load}R}.json"
             }
         }
     }
