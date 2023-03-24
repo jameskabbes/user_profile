@@ -40,7 +40,7 @@ class Profile( ParentClass ):
 
         #copy and paste the template
         print ('Generating your user Profile')
-        template_Path.copy( Destination = self.cfg['profile_Path'], print_off = False )
+        template_Path.copy( Destination = self.cfg['profile_Path'], print_off = False, override=True )
 
         #read the contents of the newly created module
         template_contents = self.cfg['profile_Path'].read()
