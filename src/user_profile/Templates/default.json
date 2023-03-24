@@ -1,7 +1,4 @@
 {
     "id": "{UP{id}UP}",
-    "email": "{UP{email}UP}",
-    "first_name": "{UP{first_name}UP}",
-    "last_name": "{UP{last_name}UP}",
     "name": "{R{first_name}R} {R{last_name}R}"
 }
