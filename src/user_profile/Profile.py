@@ -19,7 +19,10 @@ class Profile( ParentClass ):
             self.create_profile()
 
         self.profile = kabbes_config.Node( Profile._CFG_KEY, dict=self.cfg['profile_Path'].read_json_to_dict() )
-        self.cfg.adopt( self.profile )
+
+        #if user has given user_profile.profile.key=value, keep these values
+        self.cfg.get_node( Profile._CFG_KEY, make=True ).merge( self.profile )
+
 
     def get_template_Path( self ):
 
