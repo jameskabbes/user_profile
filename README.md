@@ -1,9 +1,8 @@
-[GitHub Pages](https://jameskabbes.github.io/user_profile)<br>
-[PyPI](https://pypi.org/project/kabbes-user-profile)
-
-
 # user_profile
 Provides the framework for storing a unique profile for individuals and Python environments. Each user profile has a unique set of attributes and methods, much like a Python class instance.
+
+[Documentation](https://jameskabbes.github.io/user_profile)<br>
+[PyPI](https://pypi.org/project/kabbes-user-profile)
 
 # Installation
 `pip install kabbes_user_profile`
