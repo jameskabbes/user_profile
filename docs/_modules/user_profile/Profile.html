@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>user_profile.Profile &mdash; kabbes_user_profile 0.11.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            kabbes_user_profile
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">src</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">kabbes_user_profile</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">user_profile.Profile</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for user_profile.Profile</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">parent_class</span> <span class="kn">import</span> <span class="n">ParentClass</span>
+<span class="kn">import</span> <span class="nn">py_starter</span> <span class="k">as</span> <span class="nn">ps</span>
+<span class="kn">import</span> <span class="nn">kabbes_config</span>
+
+<div class="viewcode-block" id="Profile"><a class="viewcode-back" href="../../user_profile.html#user_profile.Profile.Profile">[docs]</a><span class="k">class</span> <span class="nc">Profile</span><span class="p">(</span> <span class="n">ParentClass</span> <span class="p">):</span>
+
+    <span class="n">_USER_PROFIlE_TRIGGER_BEG</span> <span class="o">=</span> <span class="s2">&quot;{UP{&quot;</span>
+    <span class="n">_USER_PROFIlE_TRIGGER_END</span> <span class="o">=</span> <span class="s2">&quot;}UP}&quot;</span>
+
+    <span class="n">_CFG_KEY</span> <span class="o">=</span> <span class="s1">&#39;profile&#39;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+        <span class="n">ParentClass</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span> <span class="bp">self</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Profile.load"><a class="viewcode-back" href="../../user_profile.html#user_profile.Profile.Profile.load">[docs]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s1">&#39;profile_Path&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">create_profile</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">profile</span> <span class="o">=</span> <span class="n">kabbes_config</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span> <span class="n">Profile</span><span class="o">.</span><span class="n">_CFG_KEY</span><span class="p">,</span> <span class="nb">dict</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s1">&#39;profile_Path&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">read_json_to_dict</span><span class="p">()</span> <span class="p">)</span>
+
+        <span class="c1">#if user has given user_profile.profile.key=value, keep these values</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="o">.</span><span class="n">get_node</span><span class="p">(</span> <span class="n">Profile</span><span class="o">.</span><span class="n">_CFG_KEY</span><span class="p">,</span> <span class="n">make</span><span class="o">=</span><span class="kc">True</span> <span class="p">)</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">profile</span> <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Profile.get_template_Path"><a class="viewcode-back" href="../../user_profile.html#user_profile.Profile.Profile.get_template_Path">[docs]</a>    <span class="k">def</span> <span class="nf">get_template_Path</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+
+        <span class="n">template_Paths</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s1">&#39;templates_Dir&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">list_contents_Paths</span><span class="p">(</span><span class="n">block_dirs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">block_paths</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="c1"># This will be an error, no template options present</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">template_Paths</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;No templates available&#39;</span><span class="p">)</span>
+            <span class="k">assert</span> <span class="kc">False</span>
+        
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">ps</span><span class="o">.</span><span class="n">get_selection_from_list</span><span class="p">(</span> <span class="nb">list</span><span class="p">(</span><span class="n">template_Paths</span><span class="p">)</span> <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Profile.create_profile"><a class="viewcode-back" href="../../user_profile.html#user_profile.Profile.Profile.create_profile">[docs]</a>    <span class="k">def</span> <span class="nf">create_profile</span><span class="p">(</span> <span class="bp">self</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+        <span class="n">template_Path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_template_Path</span><span class="p">()</span>
+
+        <span class="c1">#copy and paste the template</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;Generating your user Profile&#39;</span><span class="p">)</span>
+        <span class="n">template_Path</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span> <span class="n">Destination</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s1">&#39;profile_Path&#39;</span><span class="p">],</span> <span class="n">print_off</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">override</span><span class="o">=</span><span class="kc">True</span> <span class="p">)</span>
+
+        <span class="c1">#read the contents of the newly created module</span>
+        <span class="n">template_contents</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s1">&#39;profile_Path&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+        <span class="c1">#format the contents of the template </span>
+        <span class="n">formatting_dict</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span> <span class="s1">&#39;user_to_load&#39;</span> <span class="p">]</span>
+        <span class="p">}</span>
+
+        <span class="c1">#enter values for all other values that couldn&#39;t be filled in</span>
+        <span class="n">formatting_values</span> <span class="o">=</span> <span class="n">ps</span><span class="o">.</span><span class="n">find_string_formatting</span><span class="p">(</span> <span class="n">template_contents</span><span class="p">,</span> <span class="n">trigger_beg</span><span class="o">=</span><span class="n">Profile</span><span class="o">.</span><span class="n">_USER_PROFIlE_TRIGGER_BEG</span><span class="p">,</span><span class="n">trigger_end</span><span class="o">=</span><span class="n">Profile</span><span class="o">.</span><span class="n">_USER_PROFIlE_TRIGGER_END</span> <span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">formatting_value</span> <span class="ow">in</span> <span class="n">formatting_values</span><span class="p">:</span>
+            <span class="n">stripped_value</span> <span class="o">=</span> <span class="n">ps</span><span class="o">.</span><span class="n">strip_trigger</span><span class="p">(</span> <span class="n">formatting_value</span><span class="p">,</span> <span class="n">Profile</span><span class="o">.</span><span class="n">_USER_PROFIlE_TRIGGER_BEG</span><span class="p">,</span> <span class="n">Profile</span><span class="o">.</span><span class="n">_USER_PROFIlE_TRIGGER_END</span> <span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">stripped_value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">formatting_dict</span><span class="p">:</span>
+                <span class="n">user_value</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Enter a value for &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">stripped_value</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;: &#39;</span><span class="p">)</span>    
+                <span class="n">formatting_dict</span><span class="p">[</span><span class="n">stripped_value</span><span class="p">]</span> <span class="o">=</span> <span class="n">user_value</span>
+        
+        <span class="n">formatted_contents</span> <span class="o">=</span> <span class="n">ps</span><span class="o">.</span><span class="n">smart_format</span><span class="p">(</span> <span class="n">template_contents</span><span class="p">,</span> <span class="n">formatting_dict</span><span class="p">,</span> <span class="n">trigger_beg</span><span class="o">=</span><span class="n">Profile</span><span class="o">.</span><span class="n">_USER_PROFIlE_TRIGGER_BEG</span><span class="p">,</span><span class="n">trigger_end</span><span class="o">=</span><span class="n">Profile</span><span class="o">.</span><span class="n">_USER_PROFIlE_TRIGGER_END</span>  <span class="p">)</span>
+
+        <span class="c1">#write the formatted info back</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s1">&#39;profile_Path&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">write</span><span class="p">(</span> <span class="n">string</span> <span class="o">=</span> <span class="n">formatted_contents</span> <span class="p">)</span></div></div>
+    
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, James Kabbes.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

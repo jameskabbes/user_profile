@@ -1,0 +1,29 @@
+user\_profile package
+=====================
+
+Submodules
+----------
+
+user\_profile.Client module
+---------------------------
+
+.. automodule:: user_profile.Client
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+user\_profile.Profile module
+----------------------------
+
+.. automodule:: user_profile.Profile
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: user_profile
+   :members:
+   :undoc-members:
+   :show-inheritance:
