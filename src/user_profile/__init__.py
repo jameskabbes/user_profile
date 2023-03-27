@@ -1,7 +1,3 @@
-### Test
-
-from . import profile_import
-
 import dir_ops as do
 import os
 
@@ -10,10 +6,10 @@ _src_Dir = _Dir.ascend()                                  #src Dir that is one a
 _repo_Dir = _src_Dir.ascend()                    
 _cwd_Dir = do.Dir( do.get_cwd() )
 
-templates_Dir = do.Dir( _Dir.join( 'Templates' ) )
-users_Dir = do.Dir( _Dir.join( 'Users' ) )
+CONFIG_KEY = 'user_profile'
 
-###
-#  
-###
-profile = profile_import.init()
+from .Profile import Profile
+from .Client import Client
+
+default_client = Client()
+profile = default_client.profile
