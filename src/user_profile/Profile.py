@@ -18,11 +18,12 @@ class Profile( ParentClass ):
         if not self.cfg['profile_Path'].exists():
             self.create_profile()
 
-        self.profile = kabbes_config.Node( Profile._CFG_KEY, dict=self.cfg['profile_Path'].read_json_to_dict() )
+        profile_from_json = kabbes_config.Config( dict=self.cfg['profile_Path'].read_json_to_dict() )
 
-        #if user has given user_profile.profile.key=value, keep these values
-        self.cfg.get_node( Profile._CFG_KEY, make=True ).merge( self.profile )
-
+        #if user has given user_profile.profile.key=value, keep these values, and make them a priority
+        self.cfg.get_node( Profile._CFG_KEY, make=True ).merge( profile_from_json )
+        self.profile = self.cfg.get_node( Profile._CFG_KEY )
+       
 
     def get_template_Path( self ):
 
