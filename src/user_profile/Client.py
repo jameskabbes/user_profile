@@ -1,6 +1,6 @@
 import kabbes_client
 import user_profile
-import py_starter as ps
+import py_seedlings as ps
 
 class Client( user_profile.Profile ):
 
